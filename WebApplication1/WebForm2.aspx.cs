@@ -42,7 +42,6 @@ namespace WebApplication1
             cmd1.ExecuteReader();
 
             Response.Redirect("WebForm2.aspx", true);
-
         }
 
         protected void Button3_Click(object sender, EventArgs e)

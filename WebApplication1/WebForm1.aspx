@@ -36,7 +36,6 @@
             <br />
             <asp:Label ID="Label3" runat="server" Text="沒有此帳號!!" Visible="False"></asp:Label>
             <br />
-            <br />
             <asp:Panel ID="Panel1" runat="server" Visible="False">
                 <h3>~~註冊~~</h3>
                 <table>

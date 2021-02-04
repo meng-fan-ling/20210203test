@@ -78,6 +78,7 @@
             <br />
             <asp:Button ID="Button1" runat="server" OnClick="Button1_Click" Text="匯出Excel" />
         &nbsp;<asp:Button ID="Button2" runat="server" OnClick="Button2_Click" Text="回前頁" />
+            <br />
         </div>
     </form>
 </body>
