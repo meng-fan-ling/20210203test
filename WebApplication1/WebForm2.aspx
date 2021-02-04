@@ -15,7 +15,9 @@
             <br />
             <asp:Label ID="Label2" runat="server" Text="ID:"></asp:Label>
 &nbsp;<asp:TextBox ID="TextBox1" runat="server" ReadOnly="True"></asp:TextBox>
-            &nbsp;<br />
+            &nbsp;<asp:Button ID="Button6" runat="server" OnClick="Button6_Click" Text="查詢" />
+&nbsp;<asp:Button ID="Button1" runat="server" OnClick="Button1_Click" Text="登出" />
+            <br />
             <br />
             <asp:Label ID="Label4" runat="server" Text="姓名:"></asp:Label>
 &nbsp;<asp:TextBox ID="TextBox2" runat="server"></asp:TextBox>
@@ -27,10 +29,9 @@
             <asp:TextBox ID="TextBox4" runat="server"></asp:TextBox>
             <br />
             <br />
-            <asp:Panel ID="Panel2" runat="server">
+            <asp:Panel ID="Panel2" runat="server" Visible="False">
                 <asp:Button ID="Button2" runat="server" OnClick="Button2_Click1" Text="新增資料" style="margin-top: 0px" />
-                &nbsp;<asp:Button ID="Button1" runat="server" OnClick="Button1_Click" Text="登出" />
-            </asp:Panel>
+                &nbsp;</asp:Panel>
             <br />
             <asp:Panel ID="Panel1" runat="server" Visible="False">
                 已有資料!是否進行修改 
@@ -38,14 +39,24 @@
                 <asp:Button ID="Button3" runat="server" OnClick="Button3_Click" Text="修改" Width="36px" />
             </asp:Panel>
             <br />
-            &nbsp;
-            <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" DataKeyNames="Id" DataSourceID="SqlDataSource1">
+            &nbsp;<asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" DataKeyNames="Id" DataSourceID="SqlDataSource1" CellPadding="4" ForeColor="#333333" GridLines="None" Visible="False">
+                <AlternatingRowStyle BackColor="White" />
                 <Columns>
                     <asp:BoundField DataField="Id" HeaderText="Id" ReadOnly="True" SortExpression="Id" />
                     <asp:BoundField DataField="Name" HeaderText="Name" SortExpression="Name" />
                     <asp:BoundField DataField="School" HeaderText="School" SortExpression="School" />
                     <asp:BoundField DataField="Subject" HeaderText="Subject" SortExpression="Subject" />
                 </Columns>
+                <EditRowStyle BackColor="#2461BF" />
+                <FooterStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" />
+                <HeaderStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" />
+                <PagerStyle BackColor="#2461BF" ForeColor="White" HorizontalAlign="Center" />
+                <RowStyle BackColor="#EFF3FB" />
+                <SelectedRowStyle BackColor="#D1DDF1" Font-Bold="True" ForeColor="#333333" />
+                <SortedAscendingCellStyle BackColor="#F5F7FB" />
+                <SortedAscendingHeaderStyle BackColor="#6D95E1" />
+                <SortedDescendingCellStyle BackColor="#E9EBEF" />
+                <SortedDescendingHeaderStyle BackColor="#4870BE" />
             </asp:GridView>
             <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" SelectCommand="SELECT * FROM [Person] WHERE ([Id] = @Id)">
                 <SelectParameters>

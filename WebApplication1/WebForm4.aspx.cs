@@ -18,7 +18,6 @@ namespace WebApplication1
             {
                 Response.Redirect("WebForm1.aspx", true);
             }
-
         }
 
         protected void Button1_Click(object sender, EventArgs e)
@@ -55,8 +54,8 @@ namespace WebApplication1
                                 DataTable myDT = new DataTable();
 
                                 //抓取MYSHEET工作表中的標題欄位，並存入DATATABLE
-                                HSSFRow headerRow = mySheet.GetRow(0) as HSSFRow;
-                                for (int x = headerRow.FirstCellNum; x < headerRow.LastCellNum; x++)
+                                HSSFRow headerRow = (HSSFRow)mySheet.GetRow(0);
+                                for (int x = headerRow.FirstCellNum; x < headerRow.LastCellNum-1; x++)
                                 {
                                     if (headerRow.GetCell(x) != null)
                                     {
@@ -66,11 +65,11 @@ namespace WebApplication1
                                 }
 
                                 //抓取HSSFSHEET第一列以後的所有資料，並存入DATATABLE中
-                                for (int x = mySheet.FirstRowNum + 1; x < mySheet.LastRowNum; x++)
+                                for (int x = mySheet.FirstRowNum + 1; x <= mySheet.LastRowNum; x++) //起始值+1表示不包含excel表頭列
                                 {
-                                    HSSFRow row = mySheet.GetRow(x) as HSSFRow;
+                                    HSSFRow row = (HSSFRow)mySheet.GetRow(x);
                                     DataRow myRow = myDT.NewRow();
-                                    for (int j = row.FirstCellNum; j < row.LastCellNum; j++)
+                                    for (int j = row.FirstCellNum; j < row.LastCellNum-1; j++)
                                     {
                                         if (row.GetCell(j) != null)
                                         {
@@ -81,7 +80,6 @@ namespace WebApplication1
                                 }
 
                                 //釋放活頁簿、工作表資源
-
                                 myWorkbook = null;
                                 mySheet = null;
                                 DataView myView = new DataView(myDT);

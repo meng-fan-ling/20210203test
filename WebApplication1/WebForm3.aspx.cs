@@ -11,6 +11,8 @@ using System.IO;
 
 using WebApplication1.Model;
 using NPOI.XSSF.UserModel;
+using System.Data.SqlClient;
+using System.Data;
 
 namespace WebApplication1
 {
@@ -146,6 +148,32 @@ namespace WebApplication1
         protected void Button2_Click(object sender, EventArgs e)
         {
             Response.Redirect("WebForm2.aspx", true);
+        }
+
+        protected void GridView1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Label1.Text = GridView1.SelectedRow.Cells[0].Text;
+            TextBox1.Text = GridView1.SelectedRow.Cells[1].Text;
+            TextBox2.Text = GridView1.SelectedRow.Cells[2].Text;
+            TextBox3.Text = GridView1.SelectedRow.Cells[3].Text;
+            Panel1.Visible = true;
+        }
+
+        protected void Button3_Click(object sender, EventArgs e)
+        {
+            SqlConnection conn1 = new SqlConnection("Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=C:\\Users\\TPE-Intern002\\Desktop\\0201test2\\WebApplication1\\App_Data\\Database1.mdf;Integrated Security=True");
+            //建立Select帶參數語法
+            conn1.Open();
+
+            SqlCommand cmd2 = new SqlCommand(@"Update [C:\USERS\TPE-INTERN002\DESKTOP\0201TEST2\WEBAPPLICATION1\APP_DATA\DATABASE1.MDF].[dbo].[Person] Set Id = @Id, Name = @Name, School = @School, Subject = @Subject Where Id = @Id", conn1);
+            cmd2.Parameters.Add("@Id", SqlDbType.NVarChar, 50).Value = Label1.Text;
+            cmd2.Parameters.Add("@Name", SqlDbType.NVarChar, 50).Value = TextBox1.Text;
+            cmd2.Parameters.Add("@School", SqlDbType.NVarChar, 50).Value = TextBox2.Text;
+            cmd2.Parameters.Add("@Subject", SqlDbType.NVarChar, 50).Value = TextBox3.Text;
+            cmd2.ExecuteReader();
+
+            Response.Redirect("WebForm3.aspx", true);
+
         }
     }
 }
