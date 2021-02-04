@@ -173,7 +173,6 @@ namespace WebApplication1
             cmd2.ExecuteReader();
 
             Response.Redirect("WebForm3.aspx", true);
-
         }
     }
 }

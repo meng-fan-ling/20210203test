@@ -53,7 +53,6 @@
                     <asp:Parameter Name="Id" Type="String" />
                 </UpdateParameters>
             </asp:SqlDataSource>
-            <br />
             <asp:Panel ID="Panel1" runat="server" Visible="False">
                 <br />
                 <table>
