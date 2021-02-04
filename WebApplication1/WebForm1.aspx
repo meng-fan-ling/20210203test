@@ -6,13 +6,14 @@
 <head runat="server">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title></title>
+
+    <style>
+        table, td, th {
+            border: 1px solid black;
+        }
+    </style>
 </head>
 
-<style>
-    table, td, th {
-        border: 1px solid black;
-    }
-</style>
 <body>
     <form id="form1" runat="server">
         <div>
@@ -41,16 +42,19 @@
                 <table>
                     <tr>
                         <td>帳號:</td>
-                        <td><asp:TextBox ID="TextBox3" runat="server"></asp:TextBox></td>
+                        <td>
+                            <asp:TextBox ID="TextBox3" runat="server"></asp:TextBox></td>
                     </tr>
                     <tr>
                         <td>密碼:</td>
-                        <td><asp:TextBox ID="TextBox4" runat="server" TextMode="Password"></asp:TextBox></td>
+                        <td>
+                            <asp:TextBox ID="TextBox4" runat="server" TextMode="Password"></asp:TextBox></td>
                     </tr>
                 </table>
-                
+
                 <asp:Button ID="Button3" runat="server" OnClick="Button3_Click" Text="確定" />
             </asp:Panel>
+            <br />
             <br />
         </div>
     </form>

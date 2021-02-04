@@ -49,7 +49,6 @@ namespace WebApplication1
             SqlConnection conn1 = new SqlConnection("Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=C:\\Users\\TPE-Intern002\\Desktop\\0201test2\\WebApplication1\\App_Data\\Database1.mdf;Integrated Security=True");
             //建立Select帶參數語法
             conn1.Open();
-
             SqlCommand cmd2 = new SqlCommand(@"Update [C:\USERS\TPE-INTERN002\DESKTOP\0201TEST2\WEBAPPLICATION1\APP_DATA\DATABASE1.MDF].[dbo].[Person] Set Id = @Id, Name = @Name, School = @School, Subject = @Subject Where Id = @Id", conn1);
             cmd2.Parameters.Add("@Id", SqlDbType.NVarChar, 50).Value = TextBox1.Text;
             cmd2.Parameters.Add("@Name", SqlDbType.NVarChar, 50).Value = TextBox2.Text;

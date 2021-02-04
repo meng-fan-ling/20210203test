@@ -18,7 +18,6 @@ namespace WebApplication1
             {
                 Response.Redirect("WebForm1.aspx", true);
             }
-
         }
 
         protected void Button1_Click(object sender, EventArgs e)
@@ -87,7 +86,7 @@ namespace WebApplication1
                                 GridView1.DataSource = myDT;
                                 GridView1.DataBind();
                             }
-                            catch(Exception ex)
+                            catch
                             {
                                 //Label1.Text = "發生例外錯誤，上傳失敗!";
                                 //throw ex;

@@ -20,10 +20,10 @@ namespace WebApplication1
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            /*if (Session["Id"] == null)
+            if (Session["Id"] == null)
             {
                 Response.Redirect("WebForm1.aspx", true);
-            }*/
+            }
         }
 
         protected void Button1_Click(object sender, EventArgs e)
