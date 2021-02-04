@@ -74,8 +74,7 @@ namespace WebApplication1
                             lb = gv.Rows[i].Cells[j].Controls[1] as Label;
                         }
                         string value1 = (lb != null) ? HttpUtility.HtmlDecode(lb.Text) : HttpUtility.HtmlDecode(gv.Rows[i].Cells[j].Text).Trim(); //將 HTTP 傳輸的 HTTP 編碼字串轉換成已解碼的字串。
-                        int intry = 0;
-                        bool isNumeric = !value1.StartsWith("0") && int.TryParse(value1, out intry);
+                        bool isNumeric = !value1.StartsWith("0") && int.TryParse(value1, out int intry);
 
                         HSSFCell cell = (HSSFCell)rowItem.CreateCell(j);
 
@@ -173,7 +172,6 @@ namespace WebApplication1
             cmd2.ExecuteReader();
 
             Response.Redirect("WebForm3.aspx", true);
-
         }
     }
 }
