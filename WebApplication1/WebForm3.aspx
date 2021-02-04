@@ -6,7 +6,6 @@
 <head runat="server">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <title></title>
-    
     <style>
     table, td, th
      {
@@ -82,7 +81,6 @@
             <br />
             <asp:Button ID="Button1" runat="server" OnClick="Button1_Click" Text="匯出Excel" />
         &nbsp;<asp:Button ID="Button2" runat="server" OnClick="Button2_Click" Text="回前頁" />
-            <br />
             <br />
         </div>
     </form>
