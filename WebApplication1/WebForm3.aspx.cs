@@ -18,11 +18,16 @@ namespace WebApplication1
 {
     public partial class WebForm3 : System.Web.UI.Page
     {
+        string Strcon = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=C:\\Users\\TPE-Intern002\\Desktop\\0201test2\\WebApplication1\\App_Data\\Database1.mdf;Integrated Security=True";
         protected void Page_Load(object sender, EventArgs e)
         {
             if (Session["Id"] == null)
             {
                 Response.Redirect("WebForm1.aspx", true);
+            }
+            if (!IsPostBack)  /*如果省略這句，下面的更新操作將無法完成，因为獲得的值是不變的*/
+            {
+                BindData();
             }
         }
 
@@ -172,6 +177,67 @@ namespace WebApplication1
             cmd2.ExecuteReader();
 
             Response.Redirect("WebForm3.aspx", true);
+        }
+
+
+        //自訂修改刪除button
+        private void BindData()
+        {
+            SqlConnection con = new SqlConnection(Strcon);
+            String sql = @"select * from [C:\USERS\TPE-INTERN002\DESKTOP\0201TEST2\WEBAPPLICATION1\APP_DATA\DATABASE1.MDF].[dbo].[Person]";
+            SqlDataAdapter ad = new SqlDataAdapter(sql, con);
+            DataSet ds = new DataSet();
+            ad.Fill(ds);
+            GridView2.DataSource = ds;
+            GridView2.DataBind();
+        }
+
+        //刪除某列資料
+        protected void GridView2_RowDeleting(object sender, GridViewDeleteEventArgs e)
+        {
+            SqlConnection con = new SqlConnection(Strcon);
+            string Id = Convert.ToString(GridView2.DataKeys[e.RowIndex].Value);/*獲取主鍵，需要設置 DataKeyNames，這裏設为 id */
+            String sql = @"delete from [C:\USERS\TPE-INTERN002\DESKTOP\0201TEST2\WEBAPPLICATION1\APP_DATA\DATABASE1.MDF].[dbo].[Person] where Id='" + Id + "'";
+
+            SqlCommand com = new SqlCommand(sql, con);
+            con.Open();
+            com.ExecuteNonQuery();
+            con.Close();
+            BindData();
+            Response.Redirect("WebForm3.aspx", true);
+        }
+
+        /*編輯操作，利用e.NewEditIndex獲取當前編輯行索引*/
+        protected void GridView2_RowEditing(object sender, GridViewEditEventArgs e)
+        {
+            GridView2.EditIndex = e.NewEditIndex;
+            BindData();              /*再次绑定顯示編輯行的原數據,不進行绑定要點2次編輯才能跳到編輯狀態*/
+        }
+
+        protected void GridView2_RowUpdating(object sender, GridViewUpdateEventArgs e)
+        {
+            SqlConnection con = new SqlConnection(Strcon);
+            String Name = (GridView2.Rows[e.RowIndex].Cells[2].Controls[0] as TextBox).Text.ToString();    /*獲取要更新的數據*/
+            String School = (GridView2.Rows[e.RowIndex].Cells[3].Controls[0] as TextBox).Text.ToString();
+            String Subject = (GridView2.Rows[e.RowIndex].Cells[4].Controls[0] as TextBox).Text.ToString();
+
+            String Id = Convert.ToString(GridView2.DataKeys[e.RowIndex].Value);/*獲取主鍵，需要設置 DataKeyNames，這裡設為 id */
+            String sql = @"update [C:\USERS\TPE-INTERN002\DESKTOP\0201TEST2\WEBAPPLICATION1\APP_DATA\DATABASE1.MDF].[dbo].[Person] set Name= N'" + Name + "',School= N'" + School + "',Subject= N'" + Subject + "' where Id='" + Id + "'";
+
+            SqlCommand com = new SqlCommand(sql, con);
+            con.Open();
+            com.ExecuteNonQuery();
+            con.Close();
+            GridView2.EditIndex = -1;
+            BindData();
+            Response.Redirect("WebForm3.aspx", true);
+        }
+
+        //取消編輯
+        protected void GridView2_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e)
+        {
+            GridView2.EditIndex = -1; /*編輯索引賦值为-1，變回正常顯示狀態*/
+            BindData();
         }
     }
 }
